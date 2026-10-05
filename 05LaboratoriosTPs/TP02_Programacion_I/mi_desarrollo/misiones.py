@@ -84,3 +84,28 @@ MISIONES = {
     "errores": MISION_CON_ERRORES,
     "larga": MISION_LARGA,
 }
+
+MISION_HOLA_MUNDO = [
+    ("saludar",),
+    ("saludar",),
+    ("saludar",),
+    ("avanzar", 0.20, 10),
+    ("saludar",),
+    ("saludar",),
+    ("saludar",),
+    ("girar", -0.1, 10),
+    ("saludar",),
+    ("girar", 0.1, 10),
+    ("saludar",),
+    ("girar", 0.1, 10),
+    ("saludar",),
+    ("girar", -0.1, 10),
+    ("saludar",),
+    ("girar", -0.25, 10),
+    ("avanzar", 0.20, 10),
+    ("girar", 0.50, 10),
+    ("saludar",),
+    ("saludar",),
+    ("saludar",),
+    ("detenerse",),
+]
