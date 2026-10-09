@@ -139,6 +139,9 @@ def ejecutar_comando(robot, comando):
     if nombre == AVANZAR:
         robot.avanzar(velocidad=velocidad, tiempo=tiempo)
 
+    if nombre == GIRAR:
+        robot.girar(velocidad=velocidad, tiempo=tiempo)
+
     try:
         match comando[0]:
             case "avanzar":
