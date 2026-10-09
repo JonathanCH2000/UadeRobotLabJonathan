@@ -37,6 +37,8 @@ VELOCIDAD_MAXIMA = 0.20
 VELOCIDAD_DE_GIRO_MAXIMA = 0.50
 TIEMPO_MAXIMO_POR_ORDEN = 10
 
+RECHAZADO = "Rechazado"
+
 
 def _extraer_datos_del_comando(comando):
     """Extrae los 3 comandos de la tupla y reemplaza con None los que no se encuentren presentes."""
@@ -246,23 +248,39 @@ def generar_reporte(historial):
     """Muestra por pantalla un resumen de la mision.
 
     Tiene que decir, como minimo:
-    - cuantos comandos se ejecutaron bien
-    - cuantos se rechazaron
-    - cual fue el motivo de cada rechazo
+    - cuantos comandos se ejecutaron bien ✅
+    - cuantos se rechazaron ✅
+    - cual fue el motivo de cada rechazo ✅
     """
-    ejecutados = 0
-    rechazados = 0
-
     print("\n===== REPORTE DE LA MISION =====")
-    for comando, resultado in historial:
-        if resultado == "Ejecutado":
-            ejecutados += 1
-        else:
-            rechazados += 1
-            print(comando, "->", resultado)
 
-    print("Comandos ejecutados:", ejecutados)
-    print("Comandos rechazados:", rechazados)
+    # El historial es necesario.
+    if not historial:
+        print("No se registraron comandos.")
+        return
+
+    # Separar los rechazos para contarlos.
+    rechazos = [
+        (comando, resultado)
+        for comando, resultado in historial
+        if resultado.startswith(RECHAZADO)
+    ]
+
+    # Calcular rechazos y comandos exitosos.
+    rechazados = len(rechazos)
+    ejecutados = len(historial) - rechazados
+
+    # Escribir en consola la cantidad de comandos totales, ejecutados y rechazados.
+    print(f"Comandos totales:    {len(historial)}")
+    print(f"Comandos ejecutados: {ejecutados}")
+    print(f"Comandos rechazados: {rechazados}")
+
+    # Escribir los rechazos que se encontraron al ejecutar el programa.
+    if rechazos:
+        print("\n----- Motivos de rechazo -----")
+        for comando, resultado in rechazos:
+            print(f"  {comando}")
+            print(f"      {resultado}")
 
 
 # =====================================================================
