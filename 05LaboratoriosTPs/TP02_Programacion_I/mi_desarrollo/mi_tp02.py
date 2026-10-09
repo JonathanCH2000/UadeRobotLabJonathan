@@ -39,7 +39,9 @@ def comando_es_valido(comando):
     - que velocidad y tiempo sean numeros de verdad, no textos
     - que el tiempo no sea negativo
     """
-    if type(comando) != tuple or len(comando) == 0:
+
+    # Verificamos que `comando` sea una tupla y no este vacia.
+    if type(comando) is not tuple or len(comando) == 0:
         return False
 
     match comando[0]:
