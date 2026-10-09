@@ -51,6 +51,51 @@ def _extraer_datos_del_comando(comando):
     return nombre, velocidad, tiempo
 
 
+def _obtener_el_motivo_del_rechazo_de_ejecucion(comando):
+    """Explica por que un comando invalido no se puede ejecutar."""
+
+    if type(comando) is not tuple:
+        return "El comando debe ser una tupla."
+    if len(comando) == 0:
+        return "La tupla esta vacia."
+
+    nombre, velocidad, tiempo = _extraer_datos_del_comando(comando)
+
+    if nombre not in COMANDOS_VALIDOS:
+        return "Comando desconocido."
+
+    if nombre in COMANDOS_QUE_LLEVAN_2_DATOS:
+        if len(comando) != 3:
+            return "El comando no puede tener mas de 3 parametros en total."
+
+        if velocidad is None or tiempo is None:
+            return "El comando debe incluid velocidad y tiempo."
+
+        if type(velocidad) not in TIPOS_DE_NUMEROS:
+            return "La velocidad debe ser un numero."
+
+        if type(tiempo) not in TIPOS_DE_NUMEROS:
+            return "El tiempo debe ser un numero."
+
+        if tiempo < 0 or tiempo > TIEMPO_MAXIMO_POR_ORDEN:
+            return f"El tiempo debe estar entre 0 y {TIEMPO_MAXIMO_POR_ORDEN} segundos."
+
+        if nombre == AVANZAR and abs(velocidad) > VELOCIDAD_MAXIMA:
+            return f"La velocidad debe estar entre: -{VELOCIDAD_MAXIMA:.2f} y {VELOCIDAD_MAXIMA:.2f} m/s."
+
+        if nombre == GIRAR and abs(velocidad) > VELOCIDAD_DE_GIRO_MAXIMA:
+            return (
+                f"La velocidad de giro debe estar entre: "
+                f"-{VELOCIDAD_DE_GIRO_MAXIMA:.2f} y {VELOCIDAD_DE_GIRO_MAXIMA:.2f} rad/s."
+            )
+
+    if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
+        if len(comando) != 1:
+            return "Esta orden no lleva parametros."
+
+    return "El comando es valido."
+
+
 # =====================================================================
 #  PARTE 1 - Validar un comando
 # =====================================================================
