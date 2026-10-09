@@ -61,7 +61,7 @@ def comando_es_valido(comando):
     Cosas que conviene revisar:
     - que la tupla no este vacia ✅
     - que el nombre del comando sea uno de los cuatro validos ✅
-    - que tenga la cantidad de datos que corresponde
+    - que tenga la cantidad de datos que corresponde ✅
         (avanzar y girar llevan dos; detenerse y saludar, ninguno)
     - que velocidad y tiempo sean numeros de verdad, no textos
     - que el tiempo no sea negativo
@@ -73,8 +73,17 @@ def comando_es_valido(comando):
 
     nombre, velocidad, tiempo = _extraer_datos_del_comando(comando)
 
+    # Validamos el comando y la cantidad de sus argumentos correspondientes a cada uno.
     if nombre not in COMANDOS_VALIDOS:
         return False
+
+    if nombre in COMANDOS_QUE_LLEVAN_2_DATOS:
+        if velocidad is None:
+            return False
+
+    if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
+        if velocidad is not None or tiempo is not None:
+            return False
 
     match comando[0]:
         case "avanzar" | "girar":
