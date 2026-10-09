@@ -32,6 +32,19 @@ COMANDOS_QUE_LLEVAN_2_DATOS = (AVANZAR, GIRAR)
 COMANDOS_QUE_LLEVAN_0_DATOS = (DETENERSE, SALUDAR)
 
 
+def _extraer_datos_del_comando(comando):
+    """Extrae los 3 comandos de la tupla y reemplaza con None los que no se encuentren presentes."""
+    if not comando:
+        return None, None, None
+
+    nombre = comando[0]
+
+    velocidad = comando[1] if len(comando) > 1 else None
+    tiempo = comando[2] if len(comando) > 2 else None
+
+    return nombre, velocidad, tiempo
+
+
 # =====================================================================
 #  PARTE 1 - Validar un comando
 # =====================================================================
