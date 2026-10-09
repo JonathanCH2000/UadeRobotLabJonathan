@@ -95,8 +95,16 @@ def comando_es_valido(comando):
         ):
             return False
 
-        # Solo se acepta tiempo positivo.
-        if tiempo < 0:
+        # Solo se acepta tiempo positivo y debajo del maximo definido.
+        if tiempo < 0 or tiempo > TIEMPO_MAXIMO_POR_ORDEN:
+            return False
+
+        # La velocidad para avanzar no debe superar el maximo definido.
+        if comando == AVANZAR and velocidad > VELOCIDAD_MAXIMA:
+            return False
+
+        # La velocidad para girar debe estar dentro del rango maximo definido.
+        if comando == GIRAR and abs(velocidad) > VELOCIDAD_DE_GIRO_MAXIMA:
             return False
 
     if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
