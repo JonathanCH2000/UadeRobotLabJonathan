@@ -100,11 +100,11 @@ def comando_es_valido(comando):
             return False
 
         # La velocidad para avanzar no debe superar el maximo definido.
-        if comando == AVANZAR and abs(velocidad) > VELOCIDAD_MAXIMA:
+        if nombre == AVANZAR and abs(velocidad) > VELOCIDAD_MAXIMA:
             return False
 
         # La velocidad para girar debe estar dentro del rango maximo definido.
-        if comando == GIRAR and abs(velocidad) > VELOCIDAD_DE_GIRO_MAXIMA:
+        if nombre == GIRAR and abs(velocidad) > VELOCIDAD_DE_GIRO_MAXIMA:
             return False
 
     if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
