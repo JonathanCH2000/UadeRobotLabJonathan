@@ -31,6 +31,8 @@ COMANDOS_VALIDOS = (AVANZAR, GIRAR, DETENERSE, SALUDAR)
 COMANDOS_QUE_LLEVAN_2_DATOS = (AVANZAR, GIRAR)
 COMANDOS_QUE_LLEVAN_0_DATOS = (DETENERSE, SALUDAR)
 
+TIPOS_DE_NUMEROS = (int, float)
+
 
 def _extraer_datos_del_comando(comando):
     """Extrae los 3 comandos de la tupla y reemplaza con None los que no se encuentren presentes."""
@@ -63,7 +65,7 @@ def comando_es_valido(comando):
     - que el nombre del comando sea uno de los cuatro validos ✅
     - que tenga la cantidad de datos que corresponde ✅
         (avanzar y girar llevan dos; detenerse y saludar, ninguno)
-    - que velocidad y tiempo sean numeros de verdad, no textos
+    - que velocidad y tiempo sean numeros de verdad, no textos ✅
     - que el tiempo no sea negativo
     """
 
@@ -79,6 +81,12 @@ def comando_es_valido(comando):
 
     if nombre in COMANDOS_QUE_LLEVAN_2_DATOS:
         if velocidad is None:
+            return False
+
+        if (
+            type(velocidad) not in TIPOS_DE_NUMEROS
+            or type(tiempo) not in TIPOS_DE_NUMEROS
+        ):
             return False
 
     if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
