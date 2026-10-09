@@ -122,11 +122,10 @@ def ejecutar_comando(robot, comando):
     """Ejecuta UN comando en el robot. Devuelve un texto con lo que paso.
 
     Ordenes que podes usar:
-
-        robot.avanzar(velocidad=..., tiempo=...)
-        robot.girar(velocidad=..., tiempo=...)
-        robot.detenerse()
-        robot.saludar()
+        robot.avanzar(velocidad=..., tiempo=...) ✅
+        robot.girar(velocidad=..., tiempo=...) ✅
+        robot.detenerse() ✅
+        robot.saludar() ✅
 
     Ojo: aunque el comando parezca valido, el robot puede rechazarlo
     igual (por ejemplo, si la velocidad supera el limite de la materia).
@@ -135,28 +134,27 @@ def ejecutar_comando(robot, comando):
 
     nombre, velocidad, tiempo = _extraer_datos_del_comando(comando)
 
+    if nombre not in COMANDOS_VALIDOS:
+        return "Rechazado: Comando desconocido."
+
     # Ejecutar el comando 'avanzar'
     if nombre == AVANZAR:
         robot.avanzar(velocidad=velocidad, tiempo=tiempo)
 
+    # Ejecutar el comando 'girar'
     if nombre == GIRAR:
         robot.girar(velocidad=velocidad, tiempo=tiempo)
 
-    try:
-        match comando[0]:
-            case "avanzar":
-                robot.avanzar(velocidad=comando[1], tiempo=comando[2])
-            case "girar":
-                robot.girar(velocidad=comando[1], tiempo=comando[2])
-            case "detenerse":
-                robot.detenerse()
-            case "saludar":
-                robot.saludar()
-            case _:
-                return "Rechazado: comando desconocido"
-        return "Ejecutado"
-    except ErrorDeSeguridad as error:
-        return "Rechazado: " + str(error)
+    # Ejecutar el comando 'detenerse'
+    if nombre == DETENERSE:
+        robot.detenerse()
+
+    # Ejecutar el comando 'saludar'
+    if nombre == SALUDAR:
+        robot.saludar()
+
+    # Todo salio bien, dar feecback de la ejecucion exitosa.
+    return "Ejecutado."
 
 
 # =====================================================================
