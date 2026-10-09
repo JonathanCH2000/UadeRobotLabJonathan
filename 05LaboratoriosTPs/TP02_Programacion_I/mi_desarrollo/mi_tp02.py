@@ -132,6 +132,13 @@ def ejecutar_comando(robot, comando):
     igual (por ejemplo, si la velocidad supera el limite de la materia).
     Eso llega como un ErrorDeSeguridad y conviene atraparlo.
     """
+
+    nombre, velocidad, tiempo = _extraer_datos_del_comando(comando)
+
+    # Ejecutar el comando 'avanzar'
+    if nombre == AVANZAR:
+        robot.avanzar(velocidad=velocidad, tiempo=tiempo)
+
     try:
         match comando[0]:
             case "avanzar":
