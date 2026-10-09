@@ -83,7 +83,12 @@ def comando_es_valido(comando):
     if nombre not in COMANDOS_VALIDOS:
         return False
 
+    # Se necesitan 2 datos ademas del nombre del comando dentro de la tupla.
     if nombre in COMANDOS_QUE_LLEVAN_2_DATOS:
+        # Solo se aceptan comandos con 3 parametros.
+        if len(comando) != 3:
+            return False
+
         # Se necesita velocidad y tiempo para estos comandos.
         if velocidad is None or tiempo is None:
             return False
@@ -107,8 +112,9 @@ def comando_es_valido(comando):
         if nombre == GIRAR and abs(velocidad) > VELOCIDAD_DE_GIRO_MAXIMA:
             return False
 
+    # Estos comandos no llevan ningun dato.
     if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
-        if velocidad is not None or tiempo is not None:
+        if len(comando) != 1:
             return False
 
     # El comando es valido.
