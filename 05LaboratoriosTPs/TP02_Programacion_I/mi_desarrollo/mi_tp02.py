@@ -223,8 +223,11 @@ def ejecutar_mision(robot, mision, historial):
 
     Un comando invalido NO tiene que cortar la mision. ✅
     """
+    total = len(mision)
+    print(f"\n===== EJECUTANDO MISION ({total} comandos) =====")
+
     # Iterar cada comando en la mision dada.
-    for comando in mision:
+    for numero, comando in enumerate(mision, start=1):
         # Si el comando es valido, entonces intenta ejecutarlo y captura cualquier ErrorDeSeguridad que se presente.
         if comando_es_valido(comando):
             try:
@@ -238,7 +241,8 @@ def ejecutar_mision(robot, mision, historial):
 
         # Registra en el historial la ejecucion actual y comentalo en la consola.
         historial.append((comando, resultado_de_ejecucion))
-        print(comando, "->", resultado_de_ejecucion)
+        print(f"[{numero}/{total}] {comando}")
+        print(f"      -> {resultado_de_ejecucion}")
 
 
 # =====================================================================
