@@ -215,43 +215,28 @@ def ejecutar_mision(robot, mision, historial):
     """Recorre la lista de comandos, uno por uno.
 
     Por cada comando:
-    - si NO es valido, lo rechaza y sigue con el siguiente
-    - si es valido, lo ejecuta
-    - en los dos casos, guarda en 'historial' que fue lo que paso
+    - si NO es valido, lo rechaza y sigue con el siguiente ✅
+    - si es valido, lo ejecuta ✅
+    - en los dos casos, guarda en 'historial' que fue lo que paso ✅
 
-    Un comando invalido NO tiene que cortar la mision.
+    Un comando invalido NO tiene que cortar la mision. ✅
     """
+    # Iterar cada comando en la mision dada.
     for comando in mision:
-        try:
-            if comando_es_valido(comando):
-                resultado = ejecutar_comando(robot, comando)
-            else:
-                if type(comando) != tuple:
-                    motivo = "el comando debe ser una tupla"
-                elif len(comando) == 0:
-                    motivo = "la tupla esta vacia"
-                elif comando[0] not in ("avanzar", "girar", "detenerse", "saludar"):
-                    motivo = "comando desconocido"
-                elif comando[0] in ("detenerse", "saludar"):
-                    motivo = "esta orden no lleva parametros"
-                elif len(comando) != 3:
-                    motivo = "la orden debe tener velocidad y tiempo"
-                elif type(comando[1]) not in (int, float):
-                    motivo = "la velocidad debe ser un numero"
-                elif type(comando[2]) not in (int, float):
-                    motivo = "el tiempo debe ser un numero"
-                elif not 0 <= comando[2] <= 10:
-                    motivo = "el tiempo debe estar entre 0 y 10 segundos"
-                elif comando[0] == "avanzar":
-                    motivo = "la velocidad debe estar entre -0.20 y 0.20 m/s"
-                else:
-                    motivo = "la velocidad de giro debe estar entre -0.50 y 0.50 rad/s"
-                resultado = "Rechazado: " + motivo
-        except Exception as error:
-            resultado = "Rechazado: " + str(error)
+        # Si el comando es valido, entonces intenta ejecutarlo y captura cualquier ErrorDeSeguridad que se presente.
+        if comando_es_valido(comando):
+            try:
+                resultado_de_ejecucion = ejecutar_comando(robot, comando)
+            except ErrorDeSeguridad as mensaje_de_error:
+                resultado_de_ejecucion = f"Rechazado: {mensaje_de_error}"
+        # Comando invalido, obtener respuesta clara del rechazo.
+        else:
+            motivo_del_rechazo = _obtener_el_motivo_del_rechazo_de_ejecucion(comando)
+            resultado_de_ejecucion = f"Rechazado: {motivo_del_rechazo}"
 
-        historial.append((comando, resultado))
-        print(comando, "->", resultado)
+        # Registra en el historial la ejecucion actual y comentalo en la consola.
+        historial.append((comando, resultado_de_ejecucion))
+        print(comando, "->", resultado_de_ejecucion)
 
 
 # =====================================================================
