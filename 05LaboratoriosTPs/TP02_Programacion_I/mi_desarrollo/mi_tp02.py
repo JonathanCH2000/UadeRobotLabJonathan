@@ -33,6 +33,10 @@ COMANDOS_QUE_LLEVAN_0_DATOS = (DETENERSE, SALUDAR)
 
 TIPOS_DE_NUMEROS = (int, float)
 
+VELOCIDAD_MAXIMA = 0.20  # M / s
+VELOCIDAD_DE_GIRO_MAXIMA = 0.50  # Rad / s.
+TIEMPO_MAXIMO_POR_ORDEN = 10  # Segundos.
+
 
 def _extraer_datos_del_comando(comando):
     """Extrae los 3 comandos de la tupla y reemplaza con None los que no se encuentren presentes."""
