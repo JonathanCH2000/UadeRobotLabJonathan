@@ -66,7 +66,7 @@ def comando_es_valido(comando):
     - que tenga la cantidad de datos que corresponde ✅
         (avanzar y girar llevan dos; detenerse y saludar, ninguno)
     - que velocidad y tiempo sean numeros de verdad, no textos ✅
-    - que el tiempo no sea negativo
+    - que el tiempo no sea negativo ✅
     """
 
     # Verificamos que `comando` sea una tupla y no este vacia.
@@ -80,13 +80,19 @@ def comando_es_valido(comando):
         return False
 
     if nombre in COMANDOS_QUE_LLEVAN_2_DATOS:
-        if velocidad is None:
+        # Se necesita velocidad y tiempo para estos comandos.
+        if velocidad is None or tiempo is None:
             return False
 
+        # Velocidad y tiempo deben ser enteros o flotantes.
         if (
             type(velocidad) not in TIPOS_DE_NUMEROS
             or type(tiempo) not in TIPOS_DE_NUMEROS
         ):
+            return False
+
+        # Solo se acepta tiempo positivo.
+        if tiempo < 0:
             return False
 
     if nombre in COMANDOS_QUE_LLEVAN_0_DATOS:
