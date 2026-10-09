@@ -154,7 +154,7 @@ def ejecutar_comando(robot, comando):
         robot.saludar()
 
     # Todo salio bien, dar feecback de la ejecucion exitosa.
-    return "Ejecutado."
+    return "Ejecutado: Comando exitoso."
 
 
 # =====================================================================
