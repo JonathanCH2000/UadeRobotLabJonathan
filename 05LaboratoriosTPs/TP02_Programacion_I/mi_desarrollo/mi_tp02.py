@@ -13,9 +13,23 @@
 #  Comision:           .....................................
 # =====================================================================
 
+from misiones import (
+    MISION_BASICA,
+    MISION_CON_ERRORES,
+    MISION_CUADRADO,
+    MISION_HOLA_MUNDO,
+    MISION_LARGA,
+)
 from robot import ErrorDeSeguridad, Robot
 
-from misiones import MISION_BASICA, MISION_CON_ERRORES, MISION_CUADRADO, MISION_LARGA,MISION_HOLA_MUNDO
+AVANZAR = "avanzar"
+GIRAR = "girar"
+DETENERSE = "detenerse"
+SALUDAR = "saludar"
+
+COMANDOS_VALIDOS = (AVANZAR, GIRAR, DETENERSE, SALUDAR)
+COMANDOS_QUE_LLEVAN_2_DATOS = (AVANZAR, GIRAR)
+COMANDOS_QUE_LLEVAN_0_DATOS = (DETENERSE, SALUDAR)
 
 
 # =====================================================================
