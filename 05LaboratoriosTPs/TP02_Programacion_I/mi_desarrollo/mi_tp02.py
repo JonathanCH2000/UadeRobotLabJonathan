@@ -9,7 +9,7 @@
 #    2. Espera a que aparezca la ventana con el robot
 #    3. Recien ahi ejecuta este archivo
 #
-#  Nombre y apellido:  Jonathan Chambi
+#  Nombre y apellido:  Jonathan Chambi, Nicolas Puegher
 #  Comision:           .....................................
 # =====================================================================
 
@@ -281,7 +281,7 @@ def generar_reporte(historial):
 
     # Escribir los rechazos que se encontraron al ejecutar el programa.
     if rechazos:
-        print("\n----- Motivos de rechazo -----")
+        print("\n===== MOTIVOS DE RECHAZO =====")
         for comando, resultado in rechazos:
             print(f"  {comando}")
             print(f"      {resultado}")
@@ -292,15 +292,16 @@ def generar_reporte(historial):
 # =====================================================================
 def main():
     robot = Robot()
+    print(robot.verificar_estado())
     robot.conectar()
 
     historial = []
 
     try:
-        # Empeza probando con MISION_BASICA.
-        # Cuando funcione, proba con MISION_CON_ERRORES: esa tiene
-        # comandos invalidos a proposito.
-        ejecutar_mision(robot, MISION_HOLA_MUNDO, historial)
+        # ejecutar_mision(robot, MISION_BASICA, historial)
+        ejecutar_mision(robot, MISION_CON_ERRORES, historial)
+        # ejecutar_mision(robot, MISION_CUADRADO, historial)
+        # ejecutar_mision(robot, MISION_LARGA, historial)
         generar_reporte(historial)
     finally:
         robot.detenerse()
