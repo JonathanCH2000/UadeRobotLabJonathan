@@ -59,7 +59,7 @@ def comando_es_valido(comando):
         ("saludar",)
 
     Cosas que conviene revisar:
-    - que la tupla no este vacia
+    - que la tupla no este vacia ✅
     - que el nombre del comando sea uno de los cuatro validos
     - que tenga la cantidad de datos que corresponde
         (avanzar y girar llevan dos; detenerse y saludar, ninguno)
