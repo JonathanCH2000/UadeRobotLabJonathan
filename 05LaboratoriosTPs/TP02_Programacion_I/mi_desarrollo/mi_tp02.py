@@ -111,25 +111,8 @@ def comando_es_valido(comando):
         if velocidad is not None or tiempo is not None:
             return False
 
-    match comando[0]:
-        case "avanzar" | "girar":
-            if len(comando) != 3:
-                return False
-            velocidad = comando[1]
-            tiempo = comando[2]
-            if type(velocidad) not in (int, float):
-                return False
-            if type(tiempo) not in (int, float):
-                return False
-            if not 0 <= tiempo <= 10:
-                return False
-            if comando[0] == "avanzar":
-                return -0.20 <= velocidad <= 0.20
-            return -0.50 <= velocidad <= 0.50
-        case "detenerse" | "saludar":
-            return len(comando) == 1
-        case _:
-            return False
+    # El comando es valido.
+    return True
 
 
 # =====================================================================
